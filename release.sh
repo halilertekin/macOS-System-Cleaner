@@ -33,30 +33,34 @@ GIT_REMOTE="origin"
 GIT_BRANCH="main"
 
 # ---------- Git commit (if any) ----------
-cd "$PROJECT_ROOT"
-if [[ -n "$(git status --porcelain)" ]]; then
-  echo -e "\e[34m[INFO]\e[0m Staging all changes..."
-  git add -A
-  echo -e "\e[34m[INFO]\e[0m Creating commit..."
-  git commit -m "chore: prepare release"
-else
-  echo -e "\e[34m[INFO]\e[0m No local changes to commit."
-fi
+if [[ "$GITHUB_ACTIONS" != "true" ]]; then
+  cd "$PROJECT_ROOT"
+  if [[ -n "$(git status --porcelain)" ]]; then
+    echo -e "\e[34m[INFO]\e[0m Staging all changes..."
+    git add -A
+    echo -e "\e[34m[INFO]\e[0m Creating commit..."
+    git commit -m "chore: prepare release"
+  else
+    echo -e "\e[34m[INFO]\e[0m No local changes to commit."
+  fi
 
-# ---------- npm version bump ----------
-cd "$NPM_DIR"
-echo -e "\e[34m[INFO]\e[0m Bumping npm version (patch)..."
-npm version patch -m "chore: release v%s"
+  # ---------- npm version bump ----------
+  cd "$NPM_DIR"
+  echo -e "\e[34m[INFO]\e[0m Bumping npm version (patch)..."
+  npm version patch -m "chore: release v%s"
+fi
 
 # ---------- npm publish ----------
 echo -e "\e[34m[INFO]\e[0m Publishing to npm (public)..."
 npm publish --access public
 
 # ---------- Git tag & push ----------
-NEW_TAG=$(git describe --tags --abbrev=0)
-echo -e "\e[34m[INFO]\e[0m Pushing commit and tag ${NEW_TAG} to ${GIT_REMOTE}/${GIT_BRANCH}..."
-git push "$GIT_REMOTE" "$GIT_BRANCH"
-git push "$GIT_REMOTE" "$NEW_TAG"
+if [[ "$GITHUB_ACTIONS" != "true" ]]; then
+  NEW_TAG=$(git describe --tags --abbrev=0)
+  echo -e "\e[34m[INFO]\e[0m Pushing commit and tag ${NEW_TAG} to ${GIT_REMOTE}/${GIT_BRANCH}..."
+  git push "$GIT_REMOTE" "$GIT_BRANCH"
+  git push "$GIT_REMOTE" "$NEW_TAG"
+fi
 
 # ---------- Homebrew publish ----------
 if [[ -x "$HOMEBREW_SCRIPT" ]]; then
