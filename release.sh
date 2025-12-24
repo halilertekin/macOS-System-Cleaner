@@ -9,6 +9,19 @@
 
 set -e
 
+# Load environment variables from .env if present
+if [[ -f "$PROJECT_ROOT/.env" ]]; then
+  source "$PROJECT_ROOT/.env"
+fi
+
+# ---------- npm authentication ----------
+if [[ -z "$NPM_TOKEN" ]]; then
+  echo -e "\e[33m[WARN] NPM_TOKEN not set. Please run 'npm login' manually.\e[0m"
+else
+  echo -e "\e[34m[INFO] Setting npm auth token from NPM_TOKEN env variable.\e[0m"
+  npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+fi
+
 # ---------- Configuration ----------
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 NPM_DIR="$PROJECT_ROOT"
