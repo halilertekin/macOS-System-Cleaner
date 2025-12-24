@@ -1,0 +1,40 @@
+{
+  "name": "@halilertekin/macos-system-cleaner",
+  "version": "1.0.0",
+  "description": "A collection of scripts to clean RAM, cache and IDEs for improved macOS system performance",
+  "main": "main_cleaner.sh",
+  "scripts": {
+    "start": "bash main_cleaner.sh",
+    "analyze": "bash main_cleaner.sh analyze",
+    "full-clean": "bash main_cleaner.sh full",
+    "cache-clean": "bash scripts/cache_cleaner.sh clean",
+    "ram-clean": "bash scripts/ram_cleaner.sh clear",
+    "ide-clean": "bash scripts/ide_cleaner.sh all",
+    "test": "echo 'No tests specified'"
+  },
+  "bin": {
+    "msc": "./main_cleaner.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kullaniciadi/macOS-System-Cleaner.git"
+  },
+  "keywords": [
+    "macos",
+    "system",
+    "cleaner",
+    "cache",
+    "ram",
+    "performance",
+    "xcode",
+    "ide",
+    "utilities"
+  ],
+  "author": "Halil",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kullaniciadi/macOS-System-Cleaner/issues"
+  },
+  "homepage": "https://github.com/kullaniciadi/macOS-System-Cleaner#readme",
+  "preferGlobal": true
+}

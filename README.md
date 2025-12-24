@@ -1,223 +1,295 @@
 # macOS System Cleaner
 
-macOS sistem performansını artırmak için RAM, önbellek ve IDE temizliği yapan kapsamlı script koleksiyonu.
+A comprehensive collection of scripts to clean RAM, cache and IDEs for improved macOS system performance.
 
-## 🚀 Özellikler
+## 🚀 Features
 
-- **RAM Temizliği**: Sistem belleğini optimize eder ve performansı artırır
-- **Önbellek Temizliği**: Kullanıcı ve sistem önbelleklerini analiz eder ve gereksiz olanları temizler
-- **IDE Temizliği**: Xcode, Android Studio, IntelliJ IDEA, PyCharm ve diğer JetBrains IDE'lerinin önbelleklerini yönetir
-- **Brew Entegrasyonu**: Homebrew güncellemeleriyle entegre çalışır
-- **Kullanıcı Dostu**: Renkli çıktılar ve açık talimatlar
-- **Güvenli Temizlik**: Kritik sistem dosyalarına dokunmaz
+- **RAM Cleaning**: Optimizes system memory and increases performance
+- **Cache Cleaning**: Analyzes and cleans user and system caches
+- **IDE Cleaning**: Manages caches for Xcode, Android Studio, IntelliJ IDEA, PyCharm and other JetBrains IDEs
+- **Brew Integration**: Works integrated with Homebrew updates
+- **User Friendly**: Colorful outputs and clear instructions
+- **Safe Cleaning**: Doesn't touch critical system files
 
-## 📦 İçerik
+## 📦 Contents
 
-Proje aşağıdaki script'leri içerir:
+The project includes the following scripts:
 
-### Ana Script'ler
+### Main Scripts
 
-- **`cache_cleaner.sh`**: Kullanıcı ve sistem önbelleklerini analiz eder ve temizler
-- **`ram_cleaner.sh`**: RAM temizliği yapar ve sistem performansını artırır
-- **`ide_cleaner.sh`**: Xcode ve diğer IDE'lerin önbelleklerini analiz eder ve temizler
-- **`main_cleaner.sh`**: Tüm temizlik işlemlerini tek bir komutla yapar
-- **`brew_update_with_cache.sh`**: Brew güncellemesi sonrası otomatik önbellek analizi yapan wrapper
+- **`cache_cleaner.sh`**: Analyzes and cleans user and system caches
+- **`ram_cleaner.sh`**: Performs RAM cleaning and increases system performance
+- **`ide_cleaner.sh`**: Analyzes and cleans caches for Xcode and other IDEs
+- **`main_cleaner.sh`**: Performs all cleaning operations with a single command
+- **`brew_update_with_cache.sh`**: Wrapper that performs automatic cache analysis after Brew updates
 
 ### cache_cleaner.sh
 
-Özellikler:
-- Kullanıcı önbelleklerini analiz eder
-- En büyük 10 önbelleği sıralar
-- npm, Yarn, Homebrew önbelleklerini kontrol eder
-- Geçici klasör boyutlarını gösterir
-- Güvenli temizleme seçenekleri sunar
+Features:
+- Analyzes user caches
+- Lists top 10 largest caches
+- Checks npm, Yarn, Homebrew caches
+- Shows temporary folder sizes
+- Provides safe cleaning options
 
-Komutlar:
+Commands:
 ```
-./scripts/cache_cleaner.sh analyze    # Önbellekleri analiz eder
-./scripts/cache_cleaner.sh clean     # Önbellekleri temizler
-./scripts/cache_cleaner.sh help      # Yardım menüsünü gösterir
+./scripts/cache_cleaner.sh analyze    # Analyzes caches
+./scripts/cache_cleaner.sh clean     # Cleans caches
+./scripts/cache_cleaner.sh help      # Shows help menu
 ```
 
 ### ram_cleaner.sh
 
-Özellikler:
-- RAM durumunu gösterir (boş, aktif, pasif, sabitlenmiş bellek)
-- Disk önbelleğini temizler
-- Sistem önbelleğini temizler
-- Arka plan süreçlerini temizler
+Features:
+- Shows RAM status (free, active, inactive, wired memory)
+- Cleans disk cache
+- Cleans system cache
+- Cleans background processes
 
-Komutlar:
+Commands:
 ```
-./scripts/ram_cleaner.sh status      # RAM durumunu gösterir
-./scripts/ram_cleaner.sh clear       # RAM temizliği yapar
-./scripts/ram_cleaner.sh deep        # Derin RAM temizliği (arka plan süreçleriyle birlikte)
+./scripts/ram_cleaner.sh status      # Shows RAM status
+./scripts/ram_cleaner.sh clear       # Performs RAM cleaning
+./scripts/ram_cleaner.sh deep        # Deep RAM cleaning (with background processes)
 ```
 
 ### ide_cleaner.sh
 
-Özellikler:
-- Xcode, Android Studio, IntelliJ IDEA, PyCharm ve diğer JetBrains IDE'lerini tespit eder
-- IDE önbellek klasörlerinin boyutlarını gösterir
-- IDE önbelleklerini güvenli bir şekilde temizler
-- Xcode'a özel temizlik işlemleri (DerivedData, Archive, iOS simülatör verileri)
+Features:
+- Detects Xcode, Android Studio, IntelliJ IDEA, PyCharm and other JetBrains IDEs
+- Shows IDE cache folder sizes
+- Safely cleans IDE caches
+- Xcode-specific cleaning operations (DerivedData, Archive, iOS simulator data)
 
-Komutlar:
+Commands:
 ```
-./scripts/ide_cleaner.sh find        # IDE klasörlerini bulur ve boyutlarını gösterir
-./scripts/ide_cleaner.sh clean       # IDE önbelleklerini temizler
-./scripts/ide_cleaner.sh xcode       # Xcode'a özel temizlik işlemleri
-./scripts/ide_cleaner.sh all         # Tüm IDE'leri ve Xcode temizliklerini yapar
+./scripts/ide_cleaner.sh find        # Finds IDE folders and shows sizes
+./scripts/ide_cleaner.sh clean       # Cleans IDE caches
+./scripts/ide_cleaner.sh xcode       # Xcode-specific cleaning operations
+./scripts/ide_cleaner.sh all         # Cleans all IDEs and Xcode
 ```
 
 ### main_cleaner.sh
 
-Özellikler:
-- Tüm temizlik script'lerini tek bir komutla çalıştırır
-- Kullanıcı dostu menü sistemi
-- Ayrı ayrı onay sistemi
+Features:
+- Runs all cleaning scripts with a single command
+- User-friendly menu system
+- Individual approval system
 
-Komutlar:
+Commands:
 ```
-./main_cleaner.sh full               # Tüm sistem temizliği (RAM + önbellekler + IDE)
-./main_cleaner.sh cache              # Sadece önbellek temizliği
-./main_cleaner.sh ram                # Sadece RAM temizliği
-./main_cleaner.sh ide                # Sadece IDE temizliği
-./main_cleaner.sh analyze            # Sadece analiz (temizleme yapmaz)
+./main_cleaner.sh full               # Full system cleaning (RAM + caches + IDE)
+./main_cleaner.sh cache              # Cache cleaning only
+./main_cleaner.sh ram                # RAM cleaning only
+./main_cleaner.sh ide                # IDE cleaning only
+./main_cleaner.sh analyze            # Analysis only (no cleaning)
 ```
 
-## 🛠️ Kurulum
+## 🛠️ Installation
 
-### 1. Projeyi Klonlama
+### 1. Clone the Project
 
 ```bash
-git clone https://github.com/kullaniciadi/macOS-System-Cleaner.git
+git clone https://github.com/username/macOS-System-Cleaner.git
 cd macOS-System-Cleaner
 ```
 
-### 2. Script İzinlerini Ayarlama
+### 2. Set Script Permissions
 
 ```bash
 chmod +x scripts/*.sh
 chmod +x main_cleaner.sh
 ```
 
-## 📖 Kullanım
-
-### Önbellek Temizliği
+### 3. Installation via npm (Global)
 
 ```bash
-# Önbellekleri analiz et
+npm install -g @halilertekin/macos-system-cleaner
+```
+
+After this installation, you can directly use the `msc` command:
+
+```bash
+msc analyze      # Performs system analysis
+msc full         # Performs full system cleaning
+msc cache        # Cache cleaning only
+msc ram          # RAM cleaning only
+msc ide          # IDE cleaning only
+```
+
+### 4. Bash Alias Usage
+
+Also, you can create an alias to use the scripts like terminal commands:
+
+```bash
+# Add to ~/.bashrc or ~/.zshrc file:
+alias msc='/path/to/macOS-System-Cleaner/main_cleaner.sh'
+
+# To apply changes:
+source ~/.bashrc  # or source ~/.zshrc
+```
+
+Then you can directly use these commands:
+
+```bash
+msc analyze      # System analysis
+msc full         # Full cleaning
+msc cache        # Cache cleaning
+msc ram          # RAM cleaning
+msc ide          # IDE cleaning
+```
+
+Or use the convenience aliases that are installed with the install.sh script:
+
+```bash
+msc-analyze      # System analysis
+msc-cache        # Cache cleaning
+msc-ram          # RAM cleaning
+msc-ide          # IDE cleaning
+```
+
+## 📖 Usage
+
+### Cache Cleaning
+
+```bash
+# Analyze caches
 ./scripts/cache_cleaner.sh analyze
 
-# Önbellekleri temizle (onay istenir)
+# Clean caches (confirmation required)
 ./scripts/cache_cleaner.sh clean
 
-# Yardım menüsü
+# Help menu
 ./scripts/cache_cleaner.sh help
 ```
 
-### RAM Temizliği
+### RAM Cleaning
 
 ```bash
-# RAM durumunu göster
+# Show RAM status
 ./scripts/ram_cleaner.sh status
 
-# RAM temizliği yap
+# Perform RAM cleaning
 ./scripts/ram_cleaner.sh clear
 
-# Derin RAM temizliği (arka plan süreçleriyle birlikte)
+# Deep RAM cleaning (with background processes)
 ./scripts/ram_cleaner.sh deep
 ```
 
-### IDE Temizliği
+### IDE Cleaning
 
 ```bash
-# IDE klasörlerini bul ve boyutlarını göster
+# Find IDE folders and show sizes
 ./scripts/ide_cleaner.sh find
 
-# IDE önbelleklerini temizle
+# Clean IDE caches
 ./scripts/ide_cleaner.sh clean
 
-# Xcode'a özel temizlik işlemleri
+# Xcode-specific cleaning operations
 ./scripts/ide_cleaner.sh xcode
 
-# Tüm IDE'leri ve Xcode temizliklerini yap
+# Clean all IDEs and Xcode
 ./scripts/ide_cleaner.sh all
 ```
 
-### Tüm Temizlikleri Bir Arada
+### All Cleanings Together
 
 ```bash
-# Tüm sistem temizliği (RAM + önbellekler + IDE)
+# Full system cleaning (RAM + caches + IDE)
 ./main_cleaner.sh full
 
-# Sadece analiz yap (temizleme yapmaz)
+# Analysis only (no cleaning)
 ./main_cleaner.sh analyze
 ```
 
-### Brew Update ile Entegrasyon
+After full cleaning operations, you'll see a visual summary screen like:
+
+```
+ ┌─────────────────────────────────────────┐
+ │            CLEANING SUMMARY             │
+ ├─────────────────────────────────────────┤
+ │ • RAM cleaning: ✓                      │
+ │ • Cache cleaning: ✓                    │
+ │ • IDE cleaning: ✓                      │
+ │ • System stability: ✓                  │
+ └─────────────────────────────────────────┘
+```
+
+### Brew Update Integration
 
 ```bash
-# Brew güncellemesi + otomatik önbellek analizi
+# Brew update + automatic cache analysis
 ./scripts/brew_update_with_cache.sh
 ```
 
-## 🧪 Test Edilmiş IDE'ler
+## 🧪 Tested IDEs
 
-- **Xcode**: DerivedData, Archive, iOS simülatör verileri
-- **Android Studio**: Tüm versiyonlar (4.2, 2020.3, 2021.2, 2022.3, 2023.1)
-- **IntelliJ IDEA**: Tüm versiyonlar
-- **PyCharm**: Tüm versiyonlar
-- **JetBrains IDE'leri**: GoLand, WebStorm, CLion, PhpStorm, Rider, AppCode, DataGrip, RubyMine
-- **Visual Studio Code**: Uygulama verileri
+- **Xcode**: DerivedData, Archive, iOS simulator data
+- **Android Studio**: All versions (4.2, 2020.3, 2021.2, 2022.3, 2023.1)
+- **IntelliJ IDEA**: All versions
+- **PyCharm**: All versions
+- **JetBrains IDEs**: GoLand, WebStorm, CLion, PhpStorm, Rider, AppCode, DataGrip, RubyMine
+- **Visual Studio Code**: Application data
 
-## ⚠️ Dikkat Edilmesi Gerekenler
+## ⚠️ Warnings
 
-### Genel Uyarılar
-- Script'ler sistem performansını artırmak için tasarlanmıştır
-- Temizlik işlemleri öncesi önemli verilerinizi yedeklemek iyi bir uygulamadır
-- IDE temizliği sonrası IDE'lerin yeniden başlatılması gerekebilir
-- Xcode DerivedData ve Archive klasörlerinin temizlenmesi derleme sürelerini etkileyebilir
+### General Warnings
+- Scripts are designed to increase system performance
+- It's good practice to backup important data before cleaning operations
+- After IDE cleaning, IDEs may need to be restarted
+- Cleaning Xcode DerivedData and Archive folders may affect build times
 
-### RAM Temizliği Uyarıları
-- RAM temizliği sırasında çalışan uygulamalar kısa süreli yavaşlayabilir
-- RAM temizliği genellikle sadece yüksek bellek kullanımı durumunda gereklidir
-- Sistem belleği çok düşükse RAM temizliği önerilmez
+### RAM Cleaning Warnings
+- During RAM cleaning, running applications may slow down temporarily
+- RAM cleaning is generally only necessary when memory usage is very high
+- RAM cleaning is not recommended if system memory is very low
 
-### IDE Temizliği Uyarıları
-- IDE önbelleklerinin temizlenmesi ilk açılışta daha uzun sürebilir
-- Proje indekslerinin yeniden oluşturulması gerekebilir
-- Bazı ayarlar önbellek temizliğiyle birlikte sıfırlanabilir
+### IDE Cleaning Warnings
+- Cleaning IDE caches may take longer on first startup
+- Project indexes may need to be recreated
+- Some settings may be reset with cache cleaning
 
-## 🤝 Katkıda Bulunma
+## 🤝 Contributing
 
-Katkıda bulunmak isterseniz, lütfen bir pull request gönderin. Aşağıdaki konularda katkılar memnuniyetle karşılanır:
+If you want to contribute, please submit a pull request. Contributions in the following areas are welcome:
 
-- Yeni IDE destekleri
-- Performans iyileştirmeleri
-- Hata düzeltmeleri
-- Yeni özellikler
-- Belgeleme geliştirmeleri
+- New IDE supports
+- Performance improvements
+- Bug fixes
+- New features
+- Documentation improvements
 
-### Katkıda Bulunma Adımları
+### Contributing Steps
 
-1. Projeyi fork edin
-2. Yeni bir branch oluşturun (`git checkout -b feature/yeni-ozellik`)
-3. Değişikliklerinizi yapın
-4. Değişikliklerinizi commit edin (`git commit -m 'Yeni özellik: Açıklama'`)
-5. Branch'inize push edin (`git push origin feature/yeni-ozellik`)
-6. Yeni bir Pull Request oluşturun
+1. Fork the project
+2. Create a new branch (`git checkout -b feature/new-feature`)
+3. Make your changes
+4. Commit your changes (`git commit -m 'New feature: Description'`)
+5. Push to your branch (`git push origin feature/new-feature`)
+6. Create a new Pull Request
 
-## 📄 Lisans
+## 📄 License
 
-Bu proje MIT Lisansı ile lisanslanmıştır - detaylar için [LICENSE](LICENSE) dosyasına bakın.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🐛 Hata Bildirimi
+## 🐛 Issue Reporting
 
-Hataları ve önerileri GitHub Issues bölümünden bildirebilirsiniz.
+You can report bugs and suggestions in the GitHub Issues section.
 
-## 🙏 Teşekkürler
+## ⚠️ Disclaimer
 
-- macOS sistem yönetimi konusunda bilgi sağlayan tüm açık kaynak topluluklarına
-- Test ve geri bildirim sağlayan tüm kullanıcılara
+These scripts are developed purely for system cleaning and performance improvement purposes. The developer is not responsible for any data loss, system instability or other possible issues that may occur while using the scripts. It's recommended to take system backups before using the scripts.
+
+### Sensitive Data Content Disclaimer
+
+This script collection:
+- Does not contain any personal data
+- Does not contain user passwords, API keys or other sensitive information
+- Only performs operations on system cache and temporary files
+- Does not access user data or private files
+
+## 🙏 Acknowledgments
+
+- To all open source communities that provide information about macOS system management
+- To all users who provide testing and feedback

@@ -1,0 +1,20 @@
+# .npmignore - npm paketi için dışlanacak dosyalar
+
+# Git dosyaları
+.git/
+.gitignore
+.gitattributes
+
+# Geliştirici notları
+*.md~ 
+*.txt~
+
+# IDE dosyaları
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Diğer
+.DS_Store
+Thumbs.db

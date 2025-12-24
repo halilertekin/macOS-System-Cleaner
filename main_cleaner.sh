@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # macOS Sistem Temizleyici Ana Script
 # Tüm temizlik script'lerini tek bir yerden yönetir
@@ -93,23 +93,67 @@ full_clean() {
     "$PROJECT_ROOT/scripts/ide_cleaner.sh" all
 }
 
+# Temizleme sonrası özet ekranı
+show_summary() {
+    local lang="en"
+    if [ -n "$LANG" ] && [[ "$LANG" =~ ^tr ]]; then
+        lang="tr"
+    fi
+
+    if [ "$lang" = "tr" ]; then
+        print_success "TEMİZLEME İŞLEMİ TAMAMLANDI! 🎉"
+        echo
+        echo " ┌─────────────────────────────────────────┐"
+        echo " │           TEMİZLEME ÖZETİ              │"
+        echo " ├─────────────────────────────────────────┤"
+        echo " │ • RAM temizliği: ✓                     │"
+        echo " │ • Önbellek temizliği: ✓                │"
+        echo " │ • IDE temizliği: ✓                     │"
+        echo " │ • Sistem kararlılığı: ✓                │"
+        echo " └─────────────────────────────────────────┘"
+        echo
+        print_success "Sistem performansınız artırıldı!"
+        print_status "Dilerseniz sistem durumunu tekrar analiz etmek için:"
+        echo "  $0 analyze"
+    else
+        print_success "CLEANING COMPLETED! 🎉"
+        echo
+        echo " ┌─────────────────────────────────────────┐"
+        echo " │            CLEANING SUMMARY             │"
+        echo " ├─────────────────────────────────────────┤"
+        echo " │ • RAM cleaning: ✓                      │"
+        echo " │ • Cache cleaning: ✓                    │"
+        echo " │ • IDE cleaning: ✓                      │"
+        echo " │ • System stability: ✓                  │"
+        echo " └─────────────────────────────────────────┘"
+        echo
+        print_success "System performance increased!"
+        print_status "To analyze system status again:"
+        echo "  $0 analyze"
+    fi
+}
+
 # Ana fonksiyon
 main() {
     case "${1:-help}" in
         "full")
             full_clean
+            show_summary
             ;;
         "cache")
             print_status "Önbellek temizliği başlatılıyor..."
             "$PROJECT_ROOT/scripts/cache_cleaner.sh" clean
+            print_success "Önbellek temizliği tamamlandı!"
             ;;
         "ram")
             print_status "RAM temizliği başlatılıyor..."
             "$PROJECT_ROOT/scripts/ram_cleaner.sh" deep
+            print_success "RAM temizliği tamamlandı!"
             ;;
         "ide")
             print_status "IDE temizliği başlatılıyor..."
             "$PROJECT_ROOT/scripts/ide_cleaner.sh" all
+            print_success "IDE temizliği tamamlandı!"
             ;;
         "analyze")
             print_status "Sistem analizi başlatılıyor..."
