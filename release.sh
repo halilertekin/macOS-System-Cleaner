@@ -9,6 +9,9 @@
 
 set -e
 
+# Set project root directory
+PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # Load environment variables from .env if present
 if [[ -f "$PROJECT_ROOT/.env" ]]; then
   source "$PROJECT_ROOT/.env"
