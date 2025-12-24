@@ -2,7 +2,7 @@ class MacosSystemCleaner < Formula
   desc "A collection of scripts to clean RAM, cache and IDEs for improved macOS system performance"
   homepage "https://github.com/halilertekin/macOS-System-Cleaner"
   url "https://github.com/halilertekin/macOS-System-Cleaner/archive/refs/tags/v1.0.0.tar.gz"
-  sha256 "REPLACE_WITH_ACTUAL_SHA256"  # Will be replaced with actual SHA256 of the tarball
+  sha256 "REPLACE_WITH_ACTUAL_SHA256"  # This will be updated with each new release
   license "MIT"
 
   def install
@@ -31,6 +31,10 @@ class MacosSystemCleaner < Formula
       To install bash/zsh aliases:
         source #{prefix}/install.sh --bash-alias    # for bash
         source #{prefix}/install.sh --zsh-alias     # for zsh
+
+      Note: When updating to a new version, the SHA256 hash in the formula
+      needs to be updated with the new tarball's hash.
+      You can calculate it with: shasum -a 256 <tarball_name>.tar.gz
     EOS
   end
 
