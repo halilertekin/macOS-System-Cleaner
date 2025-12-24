@@ -289,6 +289,29 @@ This script collection:
 - Only performs operations on system cache and temporary files
 - Does not access user data or private files
 
+## 🔧 Homebrew Formula Otomatikleştirme
+
+Bu proje, Homebrew formula dosyasındaki SHA256 hash değerlerini otomatik olarak güncellemek için bir script içerir:
+
+```bash
+# Yeni bir tag için SHA256 hash hesapla ve formula dosyasını güncelle
+./update_formula_sha.sh --update v1.1.0
+
+# GitHub'dan son tag'ı al ve güncelle
+./update_formula_sha.sh --latest
+
+# Sadece hesapla, güncelleme yapma (test modu)
+./update_formula_sha.sh --dry-run v1.1.0
+
+# Mevcut formula versiyonunu göster
+./update_formula_sha.sh --show-current
+
+# Yardım menüsü
+./update_formula_sha.sh --help
+```
+
+Bu script, GitHub'da yeni bir tag oluşturulduğunda, ilgili tarball'ın SHA256 hash'ini hesaplar ve Homebrew formula dosyasını otomatik olarak günceller.
+
 ## 🙏 Acknowledgments
 
 - To all open source communities that provide information about macOS system management
