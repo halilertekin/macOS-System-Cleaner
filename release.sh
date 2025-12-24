@@ -18,15 +18,18 @@ if [[ -f "$PROJECT_ROOT/.env" ]]; then
 fi
 
 # ---------- npm authentication ----------
+# Fallback to NODE_AUTH_TOKEN if NPM_TOKEN is not set (standard for CI)
+NPM_TOKEN="${NPM_TOKEN:-$NODE_AUTH_TOKEN}"
+
 if [[ -z "$NPM_TOKEN" ]]; then
-  echo -e "\e[33m[WARN] NPM_TOKEN not set. Please run 'npm login' manually.\e[0m"
+  echo -e "\e[33m[WARN] NPM_TOKEN/NODE_AUTH_TOKEN not set. Attempting without explicit auth...\e[0m"
 else
-  echo -e "\e[34m[INFO] Setting npm auth token from NPM_TOKEN env variable.\e[0m"
-  npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+  echo -e "\e[34m[INFO] Configuring npm authentication...\e[0m"
+  # Create/Update .npmrc directly for maximum reliability in both local and CI
+  echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > "$HOME/.npmrc"
 fi
 
 # ---------- Configuration ----------
-PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 NPM_DIR="$PROJECT_ROOT"
 HOMEBREW_SCRIPT="$PROJECT_ROOT/publish_release.sh"
 GIT_REMOTE="origin"

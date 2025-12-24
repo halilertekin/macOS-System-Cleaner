@@ -1,8 +1,8 @@
 class MacosSystemCleaner < Formula
   desc "A collection of scripts to clean RAM, cache and IDEs for improved macOS system performance"
   homepage "https://github.com/halilertekin/macOS-System-Cleaner"
-  url "https://github.com/halilertekin/macOS-System-Cleaner/archive/refs/tags/v1.1.4.tar.gz"
-  sha256 "d5558cd419c8d46bdc958064cb97f963d1ea793866414c025906ec15033512ed"  # Updated SHA256 for v1.1.0
+  url "https://github.com/halilertekin/macOS-System-Cleaner/archive/refs/tags/v1.1.7.tar.gz"
+  sha256 "d6b0c4fbfd17335d9afb63299a71e6b46a2c7ec8053063397495faed41811e41"  # Updated SHA256 for v1.1.0
   license "MIT"
 
   def install
