@@ -1,6 +1,6 @@
 {
   "name": "@halilertekin/macos-system-cleaner",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A collection of scripts to clean RAM, cache and IDEs for improved macOS system performance",
   "main": "main_cleaner.sh",
   "scripts": {
