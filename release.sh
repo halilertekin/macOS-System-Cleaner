@@ -17,6 +17,12 @@ if [[ -f "$PROJECT_ROOT/.env" ]]; then
   source "$PROJECT_ROOT/.env"
 fi
 
+# ---------- Configuration ----------
+NPM_DIR="$PROJECT_ROOT"
+HOMEBREW_SCRIPT="$PROJECT_ROOT/publish_release.sh"
+GIT_REMOTE="origin"
+GIT_BRANCH="main"
+
 # ---------- npm authentication ----------
 # Fallback to NODE_AUTH_TOKEN if NPM_TOKEN is not set
 NPM_TOKEN="${NPM_TOKEN:-$NODE_AUTH_TOKEN}"
@@ -24,19 +30,14 @@ NPM_TOKEN="${NPM_TOKEN:-$NODE_AUTH_TOKEN}"
 if [[ -z "$NPM_TOKEN" ]]; then
   echo -e "\e[33m[WARN] NPM_TOKEN/NODE_AUTH_TOKEN is empty or not set.\e[0m"
 else
-  # Use ${#VAR} to get length without revealing the token
   echo -e "\e[34m[INFO] Configuring npm authentication (Token length: ${#NPM_TOKEN})...\e[0m"
-  # Create .npmrc in the current directory as well for local npm commands
-  echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > "$NPM_DIR/.npmrc"
-  # Also set it in HOME for global parity
-  echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > "$HOME/.npmrc"
+  # Create .npmrc in the project directory
+  echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > "$PROJECT_ROOT/.npmrc"
+  # Also set it in HOME if it exists, otherwise skip
+  if [[ -n "$HOME" ]]; then
+    echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > "$HOME/.npmrc"
+  fi
 fi
-
-# ---------- Configuration ----------
-NPM_DIR="$PROJECT_ROOT"
-HOMEBREW_SCRIPT="$PROJECT_ROOT/publish_release.sh"
-GIT_REMOTE="origin"
-GIT_BRANCH="main"
 
 # ---------- Git commit (if any) ----------
 if [[ "$GITHUB_ACTIONS" != "true" ]]; then
